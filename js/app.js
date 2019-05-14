@@ -1,4 +1,5 @@
-import AppCard from '/js/components/card/card.js';
+// import AppCard from '/js/components/card/card.js';
+import TodoList from '/js/components/todolist/todolist.js';
 import { openDB } from '/node_modules/idb/build/esm/index.js';
 import checkConnectivity from '/js/connection.js';
 
@@ -20,53 +21,68 @@ import checkConnectivity from '/js/connection.js';
   
     const database = await openDB('app-store', 1, {
       upgrade(db) {
-        db.createObjectStore('articles');
+        db.createObjectStore('todos');
       }
     });
   
     if (navigator.onLine) {
-      await database.put('articles', json, 'articles');
+      await database.put('todos', json, 'todos');
     }
 
     const acticles = await database.get('articles', 'articles');
   
-    const cards = acticles.map(item => {
-      const cardElement = new AppCard();
+    //    const cards = acticles.map(item => {
+    //   const cardElement = new AppCard();
       
-      cardElement.initCard(item.image,
-        item.placeholder,
-        item.content.title,
-        item.content.description);
-      listPage.appendChild(cardElement);
+    //   cardElement.initCard(item.image,
+    //     item.placeholder,
+    //     item.content.title,
+    //     item.content.description);
+    //   listPage.appendChild(cardElement);
   
+    //   if (!'IntersectionObserver' in window) {
+    //     cardElement.swapImage();
+    //   }
+
+    //   return cardElement;
+    // });
+
+    const todolist = articles.map(item=> {
+      const todoElement = new TodoList();
+
+      todoElement.initTodo(item.content.description,
+        item.content.status);
+
+      listPage.appendChild(todoElement);
+
       if (!'IntersectionObserver' in window) {
-        cardElement.swapImage();
+        todoElement.swapImage();
       }
 
-      return cardElement;
+      return todoElement;
+
     });
   
     /**
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
      */
+
     const options = {
       rootMarging : '0px 0px 0px 0px'
     };
+
     const callback = entries => {
       entries.forEach((entry) => {
         // If image element in view
-        if (entry.isIntersecting) {
-          // Actualy load image
-          const card = entry.target
-          card.swapImage();
+          const todo = entry.target
         }
-      });
+      );
     };
   
     const io = new IntersectionObserver(callback, options);
     // Observe cards as they enter the viewport
-    cards.forEach(card => {
-      io.observe(card);
+    todolist.forEach(todo => {
+      io.observe(todo);
     }); 
   } catch(error) {
     console.error(error);

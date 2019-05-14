@@ -27,10 +27,10 @@ class AppTheme extends LitElement {
   changeTheme() {
     this.theme = this.theme == "Light" ? "Dark" : "Light";
     if (this.theme != "Dark") {
-      document.body.style.setProperty("--app-card-color", "#2b2b2b");
+      document.body.style.setProperty("--app-bg-color", "#2b2b2b");
       document.body.style.setProperty("--app-text-color", "#ffffff");
     } else {
-      document.body.style.setProperty("--app-card-color", "#ffffff");
+      document.body.style.setProperty("--app-bg-color", "#ffffff");
       document.body.style.setProperty("--app-text-color", "#313131");
     }
   }
@@ -38,6 +38,8 @@ class AppTheme extends LitElement {
   render() {
     return html`
       <label><input type="checkbox" name="theme" id="theme" @change="${this.changeTheme}">${this.theme} mode</label>
+        <div class="form-group">
+      </div>
     `;
   }
 }
