@@ -1,6 +1,7 @@
 {
-  "name": "News feed",
-  "short_name": "News feed",
+  "name": "Todo List application",
+  "short_name": "Todo List application",
+  "valid_url": "News feed",
   "description": "Get all the information you doesn't know you wanted !",
   "icons": [
     {

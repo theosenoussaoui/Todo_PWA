@@ -1,25 +1,26 @@
 {
-  "name": "iw3",
+  "name": "Todo_App_Theo_Senoussaoui",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
   "scripts": {
     "generate": "npx workbox generateSW",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "polymer serve & json-server --watch data/db.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/syu93/iw-3.git"
+    "url": "git+https://github.com/theosenoussaoui/Todo_PWA.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/syu93/iw-3/issues"
+    "url": "https://github.com/theosenoussaoui/Todo_PWA/issues"
   },
-  "homepage": "https://github.com/syu93/iw-3#readme",
+  "homepage": "https://github.com/theosenoussaoui/Todo_PWA#readme",
   "devDependencies": {
     "json-server": "^0.14.2",
-    "polymer-cli": "^1.9.8",
+    "polymer-cli": "^1.9.9",
     "workbox-cli": "^4.2.0"
   },
   "dependencies": {

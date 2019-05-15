@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>My first PWA</title>
+  <meta name="description" content="This a simple to do application for the PWA class at ESGI.">
+  <title>Todo Application</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="/node_modules/spectre.css/dist/spectre.css">
+  <link rel="stylesheet" href="/node_modules/spectre.css/dist/spectre.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -38,6 +39,11 @@
     .title {
       font-size: 1.2rem;
       margin: 10px 0;
+    }
+    
+    .error-message {
+      display: none;
+      margin-bottom: 10px;
     }
     
     #app { height: 100%; }
@@ -119,30 +125,39 @@
         <main>
           <div class="container">
             <div class="skeleton" active>
+              <div class="toast toast-primary error-message">
+                Vous êtes actuellement hors connexion, l'application peut dysfonctioner.
+              </div>
               <h6>
                 Veuilez entrer votre premier élément de liste.
               </h6>
-              <div class="title"></div>
-              <div class="text"></div>
-              <div class="input-group todo-add">
-                <input class="form-input" type="text" id="input-example-1" placeholder="Entrez votre prochaine todo">
-                <button class="btn btn-primary input-group-btn">Valider</button>
-              </div>
+              <section page="list">
+                <todo-creation></todo-creation>
+              </section>
+              <section page="view"></section>
             </div>
-            <todo-list></todo-list>
-            <section page="list">
-              <div class="ctn">
-                <h1></h1>
-              </div>
-            </section>
-            <section page="view"></section>
           </div>
         </main>
       </div>
     </section>
+    <script type="text/javascript">
+      var skeleton = document.querySelector('.error-message');
+      window.addEventListener("load", () => {
+        function handleNetworkChange(event) {
+          if (navigator.onLine) {
+            skeleton.style.display = "none";
+          } else {
+            skeleton.style.display = "block";
+          }
+        }
+        window.addEventListener("online", handleNetworkChange);
+        window.addEventListener("offline", handleNetworkChange);
+      });
+    </script>
     <script type="module" src="/js/app.js" async></script>
     <script type="module" src="/js/components/app-theme/app-theme.js"></script>
     <script type="module" src="/js/components/todolist/todolist.js"></script>
+    <script type="module" src="/js/components/todolist/todolistCreation.js"></script>
     <script nomodule>
       const script = document.createElement('script');
       script.src = "./js/components/todolist/todolist.js";
